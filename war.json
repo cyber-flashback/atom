@@ -1,0 +1,126 @@
+{
+  "3": {
+    "inputs": {
+      "seed": 415982301178468,
+      "steps": 20,
+      "cfg": 8,
+      "sampler_name": "euler",
+      "scheduler": "normal",
+      "denoise": 0.9,
+      "model": [
+        "17",
+        0
+      ],
+      "positive": [
+        "6",
+        0
+      ],
+      "negative": [
+        "7",
+        0
+      ],
+      "latent_image": [
+        "5",
+        0
+      ]
+    },
+    "class_type": "KSampler",
+    "_meta": {
+      "title": "KSampler"
+    }
+  },
+  "4": {
+    "inputs": {
+      "ckpt_name": "dreamshaper_8.safetensors"
+    },
+    "class_type": "CheckpointLoaderSimple",
+    "_meta": {
+      "title": "체크포인트 로드"
+    }
+  },
+  "5": {
+    "inputs": {
+      "width": 512,
+      "height": 512,
+      "batch_size": 1
+    },
+    "class_type": "EmptyLatentImage",
+    "_meta": {
+      "title": "빈 잠재 이미지"
+    }
+  },
+  "6": {
+    "inputs": {
+      "text": "masterpiece, best quality, historically accurate depiction, meticulous detail, authentic costumes, correct insignia, period-appropriate architecture, accurate geographical representation, evocative of 1940s Eastern Europe, reflecting the political climate of the time, nuanced portrayal of suffering and resistance, truthful representation of Soviet occupation, masterful composition, cinematic lighting, evocative atmosphere, powerful emotional impact, high resolution, sharp details, rich textures, realistic rendering, dramatic use of shadow and light, compelling narrative, award-winning artwork, museum-quality piece, depiction of Soviet occupation of Estonia, Latvia, and Lithuania in 1940, portrayal of Romanian territorial losses in 1939-1940, realistic representation of military presence, showing the impact on civilian life, capturing the atmosphere of fear and uncertainty",
+      "clip": [
+        "17",
+        1
+      ]
+    },
+    "class_type": "CLIPTextEncode",
+    "_meta": {
+      "title": "CLIP Text Encode (Positive)"
+    }
+  },
+  "7": {
+    "inputs": {
+      "text": "low quality, bad anatomy, inaccurate historical details, anachronisms, incorrect uniforms, fantastical elements, fictional events, romanticized portrayal of occupation, glorification of violence, insensitive depiction of suffering, misrepresentation of historical events, unrealistic geographical locations, blurry image, grainy texture, low resolution, poor composition, dull colors, washed-out image, muddy details, unnatural lighting, amateurish rendering, lack of emotional impact, unconvincing portrayal, technically flawed, distorted perspective, cartoonish depiction, overly sentimental portrayal, ignoring the brutality of the occupation, celebratory depiction of Soviet actions, missing key historical elements related to the occupation of the Baltic states and Romania, ignoring the impact on the civilian population, inaccurate representation of military equipment",
+      "clip": [
+        "17",
+        1
+      ]
+    },
+    "class_type": "CLIPTextEncode",
+    "_meta": {
+      "title": "CLIP Text Encode (Negative)"
+    }
+  },
+  "8": {
+    "inputs": {
+      "samples": [
+        "3",
+        0
+      ],
+      "vae": [
+        "4",
+        2
+      ]
+    },
+    "class_type": "VAEDecode",
+    "_meta": {
+      "title": "VAE 디코드"
+    }
+  },
+  "9": {
+    "inputs": {
+      "filename_prefix": "Result",
+      "images": [
+        "8",
+        0
+      ]
+    },
+    "class_type": "SaveImage",
+    "_meta": {
+      "title": "이미지 저장"
+    }
+  },
+  "17": {
+    "inputs": {
+      "lora_name": "Craig_Severance_-_War-000004.safetensors",
+      "strength_model": 1,
+      "strength_clip": 1,
+      "model": [
+        "4",
+        0
+      ],
+      "clip": [
+        "4",
+        1
+      ]
+    },
+    "class_type": "LoraLoader",
+    "_meta": {
+      "title": "LoRA 로드"
+    }
+  }
+}
