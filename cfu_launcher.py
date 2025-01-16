@@ -21,7 +21,7 @@ class ComfyUIWorkflowEditor:
         self.stop_monitoring = False  # 폴더 감시 종료 플래그
 
     def load_workflow(self):
-        """워크플로우 JSON 파일 로드"""
+        # 워크플로우 JSON 파일 로드
         try:
             with open(self.workflow_path, 'r', encoding='utf-8') as f:
                 return json.load(f)
@@ -30,7 +30,7 @@ class ComfyUIWorkflowEditor:
             return None
 
     def save_workflow(self, workflow):
-        """워크플로우 JSON 파일 저장"""
+        # 워크플로우 JSON 파일 저장
         try:
             with open(self.workflow_path, 'w', encoding='utf-8') as f:
                 json.dump(workflow, f, indent=2, ensure_ascii=False)
@@ -39,7 +39,7 @@ class ComfyUIWorkflowEditor:
             print(f"Error saving workflow: {e}")
 
     def update_prompts(self, positive_prompt=None, negative_prompt=None):
-        """긍정 및 부정 프롬프트 수정"""
+        # 긍정 및 부정 프롬프트 수정
         workflow = self.load_workflow()
         if not workflow:
             return None
@@ -73,7 +73,7 @@ class ComfyUIWorkflowEditor:
             return None
 
     def queue_workflow(self, workflow):
-        """워크플로우를 API에 전송하여 실행"""
+        # 워크플로우를 API에 전송하여 실행
         try:
             response = requests.post(f"{self.api_url}/prompt", json={"prompt": workflow, "version": 0.4})
             if response.status_code == 200:
@@ -87,7 +87,7 @@ class ComfyUIWorkflowEditor:
             print(f"Error sending workflow to API: {e}")
 
     def monitor_folder(self):
-        """폴더를 감지하여 새로운 파일이 생성되면 열고 종료"""
+        # 폴더를 감지하여 새로운 파일이 생성되면 열고 종료
         print(f"Monitoring folder: {self.output_dir}")
         try:
             files = glob.glob(os.path.join(self.output_dir, "*.png"))
@@ -111,7 +111,7 @@ class ComfyUIWorkflowEditor:
             print(f"Error monitoring folder: {e}")
 
     def open_image(self, file_path):
-        """이미지 열기"""
+        # 이미지 열기
         try:
             print(f"Opening image: {file_path}")
             os.startfile(file_path)
@@ -120,7 +120,7 @@ class ComfyUIWorkflowEditor:
 
 
 def check_comfyui_running(max_retries=10):
-    """ComfyUI 서버가 응답하는지 확인"""
+    # ComfyUI 서버가 응답하는지 확인
     for _ in range(max_retries):
         try:
             response = requests.get("http://127.0.0.1:8188")
@@ -132,7 +132,7 @@ def check_comfyui_running(max_retries=10):
 
 
 def launch_stabilitymatrix_comfyui(auto_launch_browser=True):
-    """StabilityMatrix의 ComfyUI를 실행하고 정상 작동 확인 후 터미널 종료"""
+    # StabilityMatrix의 ComfyUI를 실행하고 정상 작동 확인 후 터미널 종료
     comfyui_path = os.path.join(
         os.path.expanduser("~"),
         "AppData", "Roaming", "StabilityMatrix", "Packages", "ComfyUI"
